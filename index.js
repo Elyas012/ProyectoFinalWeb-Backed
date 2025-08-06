@@ -17,14 +17,28 @@ const db = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
+db.connect(err => {
+  if (err) {
+    console.error('Error conectando a la base de datos:', err);
+  } else {
+    console.log('Conexión a la base de datos MySQL exitosa');
+  }
+});
+
+
 // GET /products → devuelve todos los productos
 app.get('/products', (req, res) => {
   const sql = 'SELECT id, nombre AS name, imagen AS image, precio AS price FROM productos';
   db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.error('Error al consultar productos:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log(`Se consultaron ${results.length} productos.`);
     res.json(results);
   });
 });
+
 
 // POST /checkout → crea cliente (si no existe), orden y orden_items
 app.post('/checkout', (req, res) => {
