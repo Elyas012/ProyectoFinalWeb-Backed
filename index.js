@@ -104,7 +104,5 @@ function queryPromise(conn, sql, params) {
   });
 }
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`API corriendo en http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`API corriendo en http://localhost:${PORT}`));
