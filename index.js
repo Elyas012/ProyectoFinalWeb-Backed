@@ -20,16 +20,6 @@ const db = mysql.createPool({
 });
 
 
-
-db.connect(err => {
-  if (err) {
-    console.error('Error conectando a la base de datos:', err);
-  } else {
-    console.log('Conexión a la base de datos MySQL exitosa');
-  }
-});
-
-
 // GET /products → devuelve todos los productos
 app.get('/products', (req, res) => {
   const sql = 'SELECT id, nombre AS name, imagen AS image, precio AS price FROM productos';
