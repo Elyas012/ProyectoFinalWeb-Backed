@@ -32,15 +32,10 @@ db.connect(err => {
 app.get('/products', (req, res) => {
   const sql = 'SELECT id, nombre AS name, imagen AS image, precio AS price FROM productos';
   db.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error al consultar productos:', err);
-      return res.status(500).json({ error: err.message });
-    }
-    console.log(`Se consultaron ${results.length} productos.`);
+    if (err) return res.status(500).json({ error: err.message });
     res.json(results);
   });
 });
-
 
 // POST /checkout → crea cliente (si no existe), orden y orden_items
 app.post('/checkout', (req, res) => {
